@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affiliate Leaderboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <img src="https://static.wixstatic.com/media/5fd7aa_9bd67e2de65c497d9ea1bd6f13955f9c~mv2.png/v1/fill/w_322,h_41,al_c,lg_1,q_85,enc_avif,quality_auto/Layer_9%20(3).png" alt="Logo" class="logo" />
+      <h1>Affiliate Leaderboard</h1>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Filters -->
+    <form class="filters" method="GET" action="/">
+      <div class="filter-group">
+        <label for="date_from">From</label>
+        <input type="date" id="date_from" name="date_from" value="{{ date_from }}" />
+      </div>
+      <div class="filter-group">
+        <label for="date_to">To</label>
+        <input type="date" id="date_to" name="date_to" value="{{ date_to }}" />
+      </div>
+      <div class="filter-group">
+        <label for="currency">Currency</label>
+        <select id="currency" name="currency">
+          {% for c in currencies %}
+          <option value="{{ c }}" {% if c == currency %}selected{% endif %}>{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="secret">Affiliate Secret</label>
+        <input type="password" id="secret" name="secret" value="{{ secret }}" placeholder="Enter secret key" />
+      </div>
+      <button type="submit">Apply</button>
+      {% if entries %}
+      <a class="btn-csv"
+         href="/export-csv?date_from={{ date_from }}&date_to={{ date_to }}&currency={{ currency }}&secret={{ secret }}">
+        Export CSV
+      </a>
+      {% endif %}
+    </form>
+
+    <!-- Meta info -->
+    {% if meta %}
+    <div class="meta-bar">
+      <span><strong>Affiliate ID:</strong> {{ meta.get('affiliate_id', 'N/A') }}</span>
+      <span><strong>Platform:</strong> {{ meta.get('platform_type', '') }}</span>
+      <span><strong>Currency:</strong> {{ meta.get('currency', currency) }}</span>
+      <span><strong>Generated:</strong> {{ meta.get('generated_at', '') }}</span>
+    </div>
+    {% endif %}
+
+    <!-- Error -->
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <!-- Leaderboard table -->
+    {% if entries %}
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player ID</th>
+          <th>Player</th>
+          <th>Total Wager ({{ meta.get('currency', currency) }})</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in entries %}
+        <tr class="{% if loop.index == 1 %}rank-1{% elif loop.index == 2 %}rank-2{% elif loop.index == 3 %}rank-3{% endif %}">
+          <td class="rank">{{ item.rank }}</td>
+          <td class="player-id">{{ item.player_id }}</td>
+          <td class="nickname">{{ item.nickname }}</td>
+          <td class="wager">{{ "{:,.2f}".format(item.total_wager) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% elif not error %}
+    <p class="empty">No data for the selected period.</p>
+    {% endif %}
+
+  </main>
+
+</body>
+</html>

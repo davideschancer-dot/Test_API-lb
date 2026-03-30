@@ -1,0 +1,208 @@
+/* ── Reset & base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0f0f13;
+  color: #e8e8f0;
+  min-height: 100vh;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+header {
+  background: #1a1a24;
+  border-bottom: 1px solid #2a2a38;
+  padding: 1.25rem 2rem;
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ── Main ─────────────────────────────────────────────────── */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+/* ── Filters ──────────────────────────────────────────────── */
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  background: #1a1a24;
+  border: 1px solid #2a2a38;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.filter-group label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.filter-group input,
+.filter-group select {
+  background: #0f0f13;
+  border: 1px solid #2a2a38;
+  border-radius: 6px;
+  color: #e8e8f0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+  border-color: #5b5bf6;
+}
+
+.filters button {
+  background: #5b5bf6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.filters button:hover { background: #4a4ada; }
+
+.btn-csv {
+  display: inline-block;
+  background: #1e8a4a;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.btn-csv:hover { background: #176e3b; }
+
+/* ── Meta bar ─────────────────────────────────────────────── */
+.meta-bar {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  background: #1a1a24;
+  border: 1px solid #2a2a38;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.82rem;
+  color: #888;
+}
+
+.meta-bar strong {
+  color: #aaa;
+  font-weight: 600;
+}
+
+/* ── Error ────────────────────────────────────────────────── */
+.error {
+  background: #2a1010;
+  border: 1px solid #5a1a1a;
+  color: #ff8080;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+/* ── Table ────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1a1a24;
+  border: 1px solid #2a2a38;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead th {
+  background: #141420;
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+}
+
+tbody tr {
+  border-top: 1px solid #22222e;
+  transition: background 0.1s;
+}
+
+tbody tr:hover { background: #20202e; }
+
+td {
+  padding: 0.9rem 1.25rem;
+  font-size: 0.95rem;
+}
+
+/* Rank column */
+td.rank {
+  font-weight: 700;
+  color: #666;
+  width: 3rem;
+}
+
+/* Top 3 rank colours */
+tr.rank-1 td.rank { color: #ffd700; }
+tr.rank-2 td.rank { color: #c0c0c0; }
+tr.rank-3 td.rank { color: #cd7f32; }
+
+/* Nickname */
+td.nickname { font-weight: 500; }
+
+/* Wager – right-aligned monospace */
+td.wager {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: #a0c4ff;
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.empty {
+  text-align: center;
+  color: #555;
+  padding: 3rem 0;
+  font-size: 0.95rem;
+}
